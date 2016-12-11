@@ -1,4 +1,4 @@
-var AreaColumnChart = function(container, title, series, categories){
+var ColumnChart = function(container, title, series, categories){
 
   var chart = new Highcharts.Chart({
 
@@ -9,7 +9,7 @@ var AreaColumnChart = function(container, title, series, categories){
     title: {
       text: title
     },
-    series: series, 
+    series: series,
     xAxis: {
       categories: categories
     },
@@ -23,7 +23,6 @@ var AreaColumnChart = function(container, title, series, categories){
         }
       }
     }
-
   });
 
 };

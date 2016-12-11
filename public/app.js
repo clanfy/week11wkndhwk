@@ -47,8 +47,8 @@ var makeRequest = function(url, callback){
 var requestComplete = function(){
   if (this.status !==200) return;
   var countries = getCountries(this.responseText);
-  console.log("request complete");
-  console.log("countries at requestComplete", countries);
+  // console.log("request complete");
+  // console.log("countries at requestComplete", countries);
   populateChart(countries);
   areaChart(countries);
 };
@@ -56,6 +56,7 @@ var requestComplete = function(){
 var getCountries = function(responseText){
   var jsonString = responseText;
   var countries = JSON.parse(jsonString);
+  console.log(countries);
   return countries;
 };
 
@@ -64,11 +65,13 @@ var populateChart = function(countries){
   var title = "Population of Regions";
   var series = getRegionPopulation(countries);
   categories = ["Population"];
-  new PopColumnChart(popContainer, title, series, categories);
+  new ColumnChart(popContainer, title, series, categories);
 };
 
 getRegionPopulation = function(countries){
+  // console.log("get region countries:", countries);
   var populations = {};
+  // console.log("populations", populations);
   countries.forEach(function(country){
     if (populations[country.region]){
       populations[country.region] += country.population;
@@ -76,11 +79,11 @@ getRegionPopulation = function(countries){
       populations[country.region] = country.population;
     }
   });
-  console.log("get region population" ,populations);
+  // console.log("get region population" ,populations);
   var series = [];
   for (var region in populations){
     if (region) {
-      console.log("Region: ", region, "Pop: ", populations[region]);
+      // console.log("Region: ", region, "Pop: ", populations[region]);
       series.push({name: region, data: [populations[region]]});
     }
   }
@@ -92,7 +95,7 @@ var areaChart = function(countries){
   var title = "Area of Regions";
   var series = getRegionArea(countries);
   categories = ["Area"];
-  new AreaColumnChart(areaContainer, title, series, categories);
+  new ColumnChart(areaContainer, title, series, categories);
 };
 
 getRegionArea = function(countries){
@@ -104,11 +107,11 @@ getRegionArea = function(countries){
     areas[country.region] = country.area;
   }
 });
- console.log("get region area", areas);
+ // console.log("get region area", areas);
  var series = [];
  for (var region in areas){
   if (region){
-    console.log("Region: ", region, "Area: ", areas[region]);
+    // console.log("Region: ", region, "Area: ", areas[region]);
     series.push({name: region, data: [areas[region]]});
   }
 }
