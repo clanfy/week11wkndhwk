@@ -15,8 +15,7 @@ var makeRequest = function(url, callback){
 var requestComplete = function(){
   if (this.status !==200) return;
   var jsonString = this.responseText;
-  var info = JSON.parse(jsonString);
-  // createInfo(info);
+  var countries = JSON.parse(jsonString);
   console.log("request complete");
-  console.log("info", info);
+  console.log("countries", countries);
 };
