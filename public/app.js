@@ -11,6 +11,9 @@ var init = function(){
   var areaButton = document.querySelector('#area-button');
   areaButton.onclick = areaButtonClick;
 
+  var currButton = document.querySelector('#curr-button');
+  currButton.onclick = currButtonClick;
+
 };
 
 window.onload = init;
@@ -18,23 +21,38 @@ window.onload = init;
 var clearButtonClick = function(){
   var areaContainer = document.getElementById('area-chart');
   var popContainer = document.getElementById('pop-chart');
+  var currContainer = document.getElementById('curr-chart');
   areaContainer.style.display = 'initial';
   popContainer.style.display = 'initial';
+  currContainer.style.display = 'initial';
 };
 
 var popButtonClick = function(){
   var popContainer = document.getElementById('pop-chart');
   var areaContainer = document.getElementById('area-chart');
+  var currContainer = document.getElementById('curr-chart');
   popContainer.style.display = 'initial';
   areaContainer.style.display = 'none';
+  currContainer.style.display = 'none';
 
 };
 
 var areaButtonClick = function(){
   var areaContainer = document.getElementById('area-chart');
   var popContainer = document.getElementById('pop-chart');
+  var currContainer = document.getElementById('curr-chart');
   areaContainer.style.display = 'initial';
   popContainer.style.display = 'none';
+  currContainer.style.display = 'none';
+};
+
+var currButtonClick = function(){
+  var currContainer = document.getElementById('curr-chart');
+  var areaContainer = document.getElementById('area-chart');
+  var popContainer = document.getElementById('pop-chart');
+  currContainer.style.display = 'initial';
+  popContainer.style.display = 'none';
+  areaContainer.style.display = 'none';
 };
 
 var makeRequest = function(url, callback){
