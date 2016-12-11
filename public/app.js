@@ -57,7 +57,7 @@ getRegionPopulation = function(countries){
       populations[country.region] = country.population;
     }
   });
-  console.log(populations);
+  console.log("get region population" ,populations);
   var series = [];
   for (var region in populations){
     if (region) {
