@@ -1,9 +1,22 @@
 var init = function(){
   var url = 'https://restcountries.eu/rest/v1/all';
   makeRequest(url, requestComplete);
+
+  var popButton = document.querySelector('#pop-button');
+  popButton.onclick = popButtonClick;
+
 };
+  
 
 window.onload = init;
+
+var popButtonClick = function(){
+  var container = document.getElementById('pop-chart');
+  console.log("pop button clicked");
+  console.log(container);
+  container.style.visibility = 'hidden';
+
+};
 
 var makeRequest = function(url, callback){
   var request = new XMLHttpRequest();
@@ -14,19 +27,25 @@ var makeRequest = function(url, callback){
 
 var requestComplete = function(){
   if (this.status !==200) return;
-  var jsonString = this.responseText;
-  var countries = JSON.parse(jsonString);
+  var countries = getCountries(this.responseText);
   console.log("request complete");
-  console.log("countries", countries);
+  console.log("countries at requestComplete", countries);
   populateChart(countries);
+  currencyChart(countries);
+};
+
+var getCountries = function(responseText){
+  var jsonString = responseText;
+  var countries = JSON.parse(jsonString);
+  return countries;
 };
 
 var populateChart = function(countries){
-  var container = document.getElementById('pop-chart');
+  var popContainer = document.getElementById('pop-chart');
   var title = "Regions By Population";
   var series = getRegionInfo(countries);
   categories = ["population"];
-  new PopColumnChart(container, title, series, categories);
+  new PopColumnChart(popContainer, title, series, categories);
 };
 
 getRegionInfo = function(countries){
@@ -47,6 +66,10 @@ getRegionInfo = function(countries){
     }
   }
   return series;
+};
+
+var currencyChart = function(countries){
+  var currencyContainer = document.getElementById('currencies');
 };
 
 
