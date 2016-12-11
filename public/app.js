@@ -43,12 +43,12 @@ var getCountries = function(responseText){
 var populateChart = function(countries){
   var popContainer = document.getElementById('pop-chart');
   var title = "Regions By Population";
-  var series = getRegionInfo(countries);
+  var series = getRegionPopulation(countries);
   categories = ["population"];
   new PopColumnChart(popContainer, title, series, categories);
 };
 
-getRegionInfo = function(countries){
+getRegionPopulation = function(countries){
   var populations = {};
   countries.forEach(function(country){
     if (populations[country.region]){
