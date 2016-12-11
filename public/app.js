@@ -69,6 +69,7 @@ var requestComplete = function(){
   // console.log("countries at requestComplete", countries);
   populateChart(countries);
   areaChart(countries);
+  areaPieChart(countries);
   currencyChart(countries);
 };
 
@@ -87,7 +88,7 @@ var populateChart = function(countries){
   new ColumnChart(popContainer, title, series, categories);
 };
 
-getRegionPopulation = function(countries){
+var getRegionPopulation = function(countries){
   // console.log("get region countries:", countries);
   var populations = {};
   // console.log("populations", populations);
@@ -111,14 +112,22 @@ getRegionPopulation = function(countries){
 
 var areaChart = function(countries){
   var areaContainer = document.getElementById('area-chart');
-  var title = "Area of Regions";
+  var title = "Area of Regions - Column Chart";
   var series = getRegionArea(countries);
   // console.log("series", series);
   var categories = ["Area"];
   new ColumnChart(areaContainer, title, series, categories);
 };
 
-getRegionArea = function(countries){
+var areaPieChart = function(countries){
+  var areaPContainer = document.getElementById('area-pie-chart');
+  var title = "Area of Regions - Pie Chart";
+  var seriesName = "Series Name";
+  var data = getPieRegionArea(countries);
+  new PieChart(areaPContainer, title, seriesName, data);
+};
+
+var getRegionArea = function(countries){
  var areas = {};
  // console.log(areas);
  countries.forEach(function(country){
@@ -139,6 +148,28 @@ getRegionArea = function(countries){
 console.log("area series", series);
 return series;
 };
+
+var getPieRegionArea = function(countries){
+ var areas = {};
+ console.log("pie areas", areas);
+ countries.forEach(function(country){
+  if (areas[country.region]){
+    areas[country.region] += country.area;
+  } else {
+    areas[country.region] = country.area;
+  }
+ });
+ var data = [];
+ for (var region in areas){
+  if (region){
+    console.log("Region", region, "Area data", areas[region]);
+    data.push({name: region, y: [areas[region]]});
+  }
+ }
+ console.log("pie data", data);
+ return data;
+};
+
 
 var currencyChart = function(countries){
   var currencyContainer = document.getElementById('curr-chart');
