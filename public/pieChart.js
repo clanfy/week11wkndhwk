@@ -1,4 +1,4 @@
-var PieChart = function(){
+var PieChart = function(container, title, seriesName, data){
 
   var chart = new Highcharts.Chart({
 
@@ -8,7 +8,7 @@ var PieChart = function(){
     },
 
     title: {
-      text: text
+      text: title
     },
 
     series: [{
