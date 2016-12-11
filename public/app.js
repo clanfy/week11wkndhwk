@@ -6,15 +6,14 @@ var init = function(){
   popButton.onclick = popButtonClick;
 
 };
-  
 
 window.onload = init;
 
 var popButtonClick = function(){
-  var container = document.getElementById('pop-chart');
+  var areaContainer = document.getElementById('area-chart');
   console.log("pop button clicked");
-  console.log(container);
-  container.style.visibility = 'hidden';
+  console.log(areaContainer);
+  areaContainer.style.visibility = 'hidden';
 
 };
 
@@ -31,7 +30,7 @@ var requestComplete = function(){
   console.log("request complete");
   console.log("countries at requestComplete", countries);
   populateChart(countries);
-  currencyChart(countries);
+  areaChart(countries);
 };
 
 var getCountries = function(responseText){
@@ -42,9 +41,9 @@ var getCountries = function(responseText){
 
 var populateChart = function(countries){
   var popContainer = document.getElementById('pop-chart');
-  var title = "Regions By Population";
+  var title = "Population of Regions";
   var series = getRegionPopulation(countries);
-  categories = ["population"];
+  categories = ["Population"];
   new PopColumnChart(popContainer, title, series, categories);
 };
 
@@ -68,8 +67,32 @@ getRegionPopulation = function(countries){
   return series;
 };
 
-var currencyChart = function(countries){
-  var currencyContainer = document.getElementById('currencies');
+var areaChart = function(countries){
+  var areaContainer = document.getElementById('area-chart');
+  var title = "Area of Regions";
+  var series = getRegionArea(countries);
+  categories = ["Area"];
+  new AreaColumnChart(areaContainer, title, series, categories);
+};
+
+getRegionArea = function(countries){
+ var areas = {};
+ countries.forEach(function(country){
+  if (areas[country.region]){
+    areas[country.region] += country.area;
+  } else {
+    areas[country.region] = country.area;
+  }
+});
+ console.log("get region area", areas);
+ var series = [];
+ for (var region in areas){
+  if (region){
+    console.log("Region: ", region, "Area: ", areas[region]);
+    series.push({name: region, data: [areas[region]]});
+  }
+}
+return series;
 };
 
 

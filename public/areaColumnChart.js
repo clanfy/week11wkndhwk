@@ -1,6 +1,6 @@
-var areaColumnChart = function(container, title, series, categories){
+var AreaColumnChart = function(container, title, series, categories){
 
-  var chart = new HighCharts.Chart({
+  var chart = new Highcharts.Chart({
 
     chart: {
       type: 'column',
