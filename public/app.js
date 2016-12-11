@@ -23,13 +23,17 @@ var clearButtonClick = function(){
 };
 
 var popButtonClick = function(){
+  var popContainer = document.getElementById('pop-chart');
   var areaContainer = document.getElementById('area-chart');
+  popContainer.style.display = 'initial';
   areaContainer.style.display = 'none';
 
 };
 
 var areaButtonClick = function(){
+  var areaContainer = document.getElementById('area-chart');
   var popContainer = document.getElementById('pop-chart');
+  areaContainer.style.display = 'initial';
   popContainer.style.display = 'none';
 };
 
