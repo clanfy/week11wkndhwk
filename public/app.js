@@ -118,6 +118,7 @@ getRegionArea = function(countries){
     series.push({name: region, data: [areas[region]]});
   }
 }
+console.log("area series", series);
 return series;
 };
 
@@ -130,11 +131,10 @@ var currencyChart = function(countries){
 };
 
 var getCountriesCurrencies = function(countries){
-  console.log("countries at getCountriescurrencies", countries);
+  // console.log("countries at getCountriescurrencies", countries);
   var currencies = {};
  countries.forEach(function(country){
   if (currencies[country.currencies[0]]){
-  console.log("stuff");
     currencies[country.currencies[0]] += 1;
   } else {
     currencies[country.currencies[0]] = 1;
@@ -143,11 +143,11 @@ var getCountriesCurrencies = function(countries){
  var series = [];
  for (var country in currencies){
   if (country){
-    console.log("Country: ", country, "Currency:", currencies[country]);
-    series.push({name: country, data: currencies[country]});
+    // console.log("Country: ", country, "Currency:", currencies[country]);
+    series.push({name: country, data: [currencies[country]]});
   }
  }
- console.log("series", series);
+ console.log("currencies series", series);
  return series;
 };
 
