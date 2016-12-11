@@ -5,16 +5,22 @@ var init = function(){
   var popButton = document.querySelector('#pop-button');
   popButton.onclick = popButtonClick;
 
+  var areaButton = document.querySelector('#area-button');
+  areaButton.onclick = areaButtonClick;
+
 };
 
 window.onload = init;
 
 var popButtonClick = function(){
   var areaContainer = document.getElementById('area-chart');
-  console.log("pop button clicked");
-  console.log(areaContainer);
-  areaContainer.style.visibility = 'hidden';
+  areaContainer.style.display = 'none';
 
+};
+
+var areaButtonClick = function(){
+  var popContainer = document.getElementById('pop-chart');
+  popContainer.style.display = 'none';
 };
 
 var makeRequest = function(url, callback){
