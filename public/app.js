@@ -2,6 +2,9 @@ var init = function(){
   var url = 'https://restcountries.eu/rest/v1/all';
   makeRequest(url, requestComplete);
 
+  var clearButton = document.querySelector('#clear-button');
+  clearButton.onclick = clearButtonClick;
+
   var popButton = document.querySelector('#pop-button');
   popButton.onclick = popButtonClick;
 
@@ -11,6 +14,13 @@ var init = function(){
 };
 
 window.onload = init;
+
+var clearButtonClick = function(){
+  var areaContainer = document.getElementById('area-chart');
+  var popContainer = document.getElementById('pop-chart');
+  areaContainer.style.display = 'initial';
+  popContainer.style.display = 'initial';
+};
 
 var popButtonClick = function(){
   var areaContainer = document.getElementById('area-chart');
