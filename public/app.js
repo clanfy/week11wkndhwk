@@ -69,7 +69,7 @@ var requestComplete = function(){
   // console.log("countries at requestComplete", countries);
   populateChart(countries);
   areaChart(countries);
-  areaPieChart(countries);
+  // areaPieChart(countries);
   currencyChart(countries);
 };
 
