@@ -51,12 +51,13 @@ var requestComplete = function(){
   // console.log("countries at requestComplete", countries);
   populateChart(countries);
   areaChart(countries);
+  currencyChart(countries);
 };
 
 var getCountries = function(responseText){
   var jsonString = responseText;
   var countries = JSON.parse(jsonString);
-  console.log(countries);
+  // console.log("Get Countries", countries);
   return countries;
 };
 
@@ -64,7 +65,7 @@ var populateChart = function(countries){
   var popContainer = document.getElementById('pop-chart');
   var title = "Population of Regions";
   var series = getRegionPopulation(countries);
-  categories = ["Population"];
+  var categories = ["Population"];
   new ColumnChart(popContainer, title, series, categories);
 };
 
@@ -94,12 +95,14 @@ var areaChart = function(countries){
   var areaContainer = document.getElementById('area-chart');
   var title = "Area of Regions";
   var series = getRegionArea(countries);
-  categories = ["Area"];
+  // console.log("series", series);
+  var categories = ["Area"];
   new ColumnChart(areaContainer, title, series, categories);
 };
 
 getRegionArea = function(countries){
  var areas = {};
+ // console.log(areas);
  countries.forEach(function(country){
   if (areas[country.region]){
     areas[country.region] += country.area;
@@ -118,5 +121,58 @@ getRegionArea = function(countries){
 return series;
 };
 
+var currencyChart = function(countries){
+  var currencyContainer = document.getElementById('curr-chart');
+  var title = "Currencies of the World";
+  var series = getCountriesCurrencies(countries);
+  var categories =  ["Currencies"];
+  new SmallColumnChart(currencyContainer, title, series, categories);
+};
+
+var getCountriesCurrencies = function(countries){
+  console.log("countries at getCountriescurrencies", countries);
+  var currencies = {};
+ countries.forEach(function(country){
+  if (currencies[country.currencies[0]]){
+  console.log("stuff");
+    currencies[country.currencies[0]] += 1;
+  } else {
+    currencies[country.currencies[0]] = 1;
+  }
+ });
+ var series = [];
+ for (var country in currencies){
+  if (country){
+    console.log("Country: ", country, "Currency:", currencies[country]);
+    series.push({name: country, data: currencies[country]});
+  }
+ }
+ console.log("series", series);
+ return series;
+};
+
+// //##################################
+// //GET AREA OF EACH COUNTRY
+// getRegionArea = function(countries){
+//  var areas = {};
+//  console.log(areas);
+//  countries.forEach(function(country){
+//   if (areas[country.name]){
+//     areas[country.name] = country.area;
+//   } else {
+//     areas[country.name] = country.area;
+//   }
+// });
+//  // console.log("get region area", areas);
+//  var series = [];
+//  for (var country in areas){
+//   if (country){
+//     // console.log("Region: ", region, "Area: ", areas[region]);
+//     series.push({name: country, data: [areas[country]]});
+//   }
+// }
+// return series;
+// };
+// //###################################
 
 
