@@ -11,8 +11,8 @@ var init = function(){
   var areaButton = document.querySelector('#area-button');
   areaButton.onclick = areaButtonClick;
 
-  var areaPieChart = document.querySelector('#area-pie-button');
-  areaPieChart = areaPieButtonClick;
+  var areaPieButton = document.querySelector('#area-pie-button');
+  areaPieButton.onclick = areaPieButtonClick;
 
   var currButton = document.querySelector('#curr-button');
   currButton.onclick = currButtonClick;
@@ -25,7 +25,9 @@ var clearButtonClick = function(){
   var areaContainer = document.getElementById('area-chart');
   var popContainer = document.getElementById('pop-chart');
   var currContainer = document.getElementById('curr-chart');
+  var areaPieContainer = document.getElementById('area-pie-chart');
   areaContainer.style.display = 'initial';
+  areaPieContainer.style.display = 'initial';
   popContainer.style.display = 'initial';
   currContainer.style.display = 'initial';
 };
@@ -54,6 +56,7 @@ var areaButtonClick = function(){
 };
 
 var areaPieButtonClick = function(){
+  console.log("area pie button clicked");
   var areaPieContainer = document.getElementById('area-pie-chart');
   var areaContainer = document.getElementById('area-chart');
   var popContainer = document.getElementById('pop-chart');
@@ -68,7 +71,6 @@ var currButtonClick = function(){
   var currContainer = document.getElementById('curr-chart');
   var areaContainer = document.getElementById('area-chart');
   var areaPieContainer = document.getElementById('area-pie-chart');
-
   var popContainer = document.getElementById('pop-chart');
   currContainer.style.display = 'initial';
   popContainer.style.display = 'none';
@@ -87,7 +89,7 @@ var requestComplete = function(){
   if (this.status !==200) return;
   var countries = getCountries(this.responseText);
   // console.log("request complete");
-  // console.log("countries at requestComplete", countries);
+  console.log("countries at requestComplete", countries);
   populateChart(countries);
   areaChart(countries);
   areaPieChart(countries);
