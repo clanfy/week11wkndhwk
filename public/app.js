@@ -186,7 +186,7 @@ var getPieRegionArea = function(countries){
  for (var region in areas){
   if (region){
     console.log("Region", region, "Area data", areas[region]);
-    data.push({name: region, y: areas[region]});
+    data.push({name: region, y: areas[region], sliced: true});
   }
  }
  console.log("pie data", data);
