@@ -11,6 +11,9 @@ var init = function(){
   var areaButton = document.querySelector('#area-button');
   areaButton.onclick = areaButtonClick;
 
+  var areaPieChart = document.querySelector('#area-pie-button');
+  areaPieChart = areaPieButtonClick;
+
   var currButton = document.querySelector('#curr-button');
   currButton.onclick = currButtonClick;
 
@@ -30,9 +33,11 @@ var clearButtonClick = function(){
 var popButtonClick = function(){
   var popContainer = document.getElementById('pop-chart');
   var areaContainer = document.getElementById('area-chart');
+  var areaPieContainer = document.getElementById('area-pie-chart');
   var currContainer = document.getElementById('curr-chart');
   popContainer.style.display = 'initial';
   areaContainer.style.display = 'none';
+  areaPieContainer.style.display = 'none';
   currContainer.style.display = 'none';
 
 };
@@ -41,7 +46,20 @@ var areaButtonClick = function(){
   var areaContainer = document.getElementById('area-chart');
   var popContainer = document.getElementById('pop-chart');
   var currContainer = document.getElementById('curr-chart');
+  var areaPieContainer = document.getElementById('area-pie-chart');
   areaContainer.style.display = 'initial';
+  areaPieContainer.style.display = 'none';
+  popContainer.style.display = 'none';
+  currContainer.style.display = 'none';
+};
+
+var areaPieButtonClick = function(){
+  var areaPieContainer = document.getElementById('area-pie-chart');
+  var areaContainer = document.getElementById('area-chart');
+  var popContainer = document.getElementById('pop-chart');
+  var currContainer = document.getElementById('curr-chart');
+  areaPieContainer.style.display = 'initial';
+  areaContainer.style.display = 'none';
   popContainer.style.display = 'none';
   currContainer.style.display = 'none';
 };
@@ -49,10 +67,13 @@ var areaButtonClick = function(){
 var currButtonClick = function(){
   var currContainer = document.getElementById('curr-chart');
   var areaContainer = document.getElementById('area-chart');
+  var areaPieContainer = document.getElementById('area-pie-chart');
+
   var popContainer = document.getElementById('pop-chart');
   currContainer.style.display = 'initial';
   popContainer.style.display = 'none';
   areaContainer.style.display = 'none';
+  areaPieContainer.style.display = 'none';
 };
 
 var makeRequest = function(url, callback){
@@ -69,7 +90,7 @@ var requestComplete = function(){
   // console.log("countries at requestComplete", countries);
   populateChart(countries);
   areaChart(countries);
-  // areaPieChart(countries);
+  areaPieChart(countries);
   currencyChart(countries);
 };
 
@@ -163,7 +184,7 @@ var getPieRegionArea = function(countries){
  for (var region in areas){
   if (region){
     console.log("Region", region, "Area data", areas[region]);
-    data.push({name: region, y: [areas[region]]});
+    data.push({name: region, y: areas[region]});
   }
  }
  console.log("pie data", data);
